@@ -221,6 +221,12 @@ input {
 input::-webkit-calendar-picker-indicator {
   filter: invert(1);
 }
+/* mobile browsers switch <input type="date"> into a wide layout (centred
+   text, picker icon pushed out of view) past a certain width — cap it so
+   it stays in its normal compact rendering even in a full-width stacked row */
+#d {
+  max-width: 220px;
+}
 /* native increment/decrement control on number inputs overlaps our own
    padding on mobile Safari — drop it, the numeric keypad covers that job */
 input[type="number"] {
