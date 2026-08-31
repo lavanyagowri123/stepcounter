@@ -165,7 +165,7 @@ export default function StepBoard() {
 
   const headline = () => {
     if (loading) return "Loading the board…";
-    if (day === 0) return "Thirty days, six pairs of legs. First entries go in on 1 September.";
+    if (day === 0) return "Thirty days, seven pairs of legs. First entries go in on 1 September.";
     if (teamTotal === 0) return "Nobody has logged a step yet. Someone has to go first.";
     if (mine && mine.total >= pace)
       return `${fmt(mine.total - pace)} ahead of the 10k-a-day pace. Keep it there.`;

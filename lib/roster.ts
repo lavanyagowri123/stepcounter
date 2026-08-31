@@ -1,4 +1,4 @@
-export const TEAM = ["Lavanya", "Luke", "Marcus", "Seema", "Tantis", "Tracey"] as const;
+export const TEAM = ["Lavanya", "Luke", "Marcus", "Ryse", "Seema", "Tantis", "Tracey"] as const;
 export const ROSTER = TEAM;
 
 export type Person = (typeof ROSTER)[number];
@@ -7,6 +7,7 @@ export const HUE: Record<Person, string> = {
   Lavanya: "#FF4D6D",
   Luke: "#FF8A3D",
   Marcus: "#FFC93C",
+  Ryse: "#C65DFF",
   Seema: "#3DDC84",
   Tantis: "#2BC8D9",
   Tracey: "#7B8CFF",
