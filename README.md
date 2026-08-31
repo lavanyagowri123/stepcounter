@@ -64,7 +64,10 @@ every load). Easiest path:
 1. Install the Vercel CLI if you don't have it: `npm install -g vercel`.
 2. Link this project to a Vercel project: `vercel link`.
 3. Create a Blob store (Vercel dashboard → Storage → Create → Blob, or
-   `vercel blob store add`) and connect it to the project.
+   `vercel blob store add`) and connect it to the project. Choose **Private**
+   access — everything in this app reads and writes Blob only from
+   server-side route handlers, which hold the token, so there's no reason to
+   let anyone with a leaked URL read a blob without it.
 4. Pull the store's token into a local env file: `vercel env pull .env.local`.
    (Or copy `.env.example` to `.env.local` and paste the token in yourself.)
 

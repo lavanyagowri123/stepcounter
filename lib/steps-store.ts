@@ -16,7 +16,7 @@ function pathFor(name: Person): string {
  * everyone else for as long as the edge cache holds the old file.
  */
 export async function readPerson(name: Person): Promise<DayMap> {
-  const result = await blobGet(pathFor(name), { access: "public", useCache: false });
+  const result = await blobGet(pathFor(name), { access: "private", useCache: false });
   if (!result) return {};
   const text = await new Response(result.stream).text();
   try {
@@ -35,7 +35,7 @@ export async function readAll(): Promise<Record<Person, DayMap>> {
 /** One file per person — a write here can never clobber another person's file. */
 export async function writePerson(name: Person, days: DayMap): Promise<void> {
   await put(pathFor(name), JSON.stringify(days), {
-    access: "public",
+    access: "private",
     addRandomSuffix: false,
     allowOverwrite: true,
     contentType: "application/json",
