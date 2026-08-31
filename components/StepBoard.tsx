@@ -165,7 +165,7 @@ export default function StepBoard() {
 
   const headline = () => {
     if (loading) return "Loading the board…";
-    if (day === 0) return "Thirty days, seven pairs of legs. First entries go in on 1 September.";
+    if (day === 0) return "Thirty days, seven pairs of legs.";
     if (teamTotal === 0) return "Nobody has logged a step yet. Someone has to go first.";
     if (mine && mine.total >= pace)
       return `${fmt(mine.total - pace)} ahead of the 10k-a-day pace. Keep it there.`;
@@ -177,7 +177,7 @@ export default function StepBoard() {
   return (
     <div className="wrap">
       <div className="masthead">
-        <h1 className="title">Steptember</h1>
+        <h1 className="title">Step Into Spring</h1>
         <span className="daycount">{day === 0 ? "Starts 1 Sept" : `Day ${day} / ${CHALLENGE_DAYS}`}</span>
       </div>
       <p className="headline">{headline()}</p>

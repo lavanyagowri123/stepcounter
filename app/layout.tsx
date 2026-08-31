@@ -9,7 +9,7 @@ const archivo = Archivo({
 });
 
 export const metadata: Metadata = {
-  title: "Steptember 2026",
+  title: "Step Into Spring",
   description: "Team step leaderboard for Steptember 2026.",
 };
 
