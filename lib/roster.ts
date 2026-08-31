@@ -1,6 +1,5 @@
 export const TEAM = ["Lavanya", "Luke", "Marcus", "Seema", "Tantis", "Tracey"] as const;
-export const TEST_PERSON = "Test Stepper" as const;
-export const ROSTER = [...TEAM, TEST_PERSON] as const;
+export const ROSTER = TEAM;
 
 export type Person = (typeof ROSTER)[number];
 
@@ -11,7 +10,6 @@ export const HUE: Record<Person, string> = {
   Seema: "#3DDC84",
   Tantis: "#2BC8D9",
   Tracey: "#7B8CFF",
-  [TEST_PERSON]: "#8A93A6",
 };
 
 export const DAILY_TARGET = 10000;

@@ -5,13 +5,11 @@ September 2026, 10,000 steps/day target, team goal 1,800,000 steps). Built
 with Next.js (App Router, TypeScript) and Vercel Blob for storage.
 
 The roster is fixed and hardcoded in [`lib/roster.ts`](lib/roster.ts) — there
-is no sign-up flow, no auth, and no admin UI. `Test Stepper` is a dummy
-account for trying the board out before the challenge starts; **clear its
-entries before 1 September** (see below).
+is no sign-up flow, no auth, and no admin UI.
 
 ## How it works
 
-- Everyone picks their name from seven pills; the choice is remembered in
+- Everyone picks their name from six pills; the choice is remembered in
   `localStorage` on that device.
 - Each person logs one number of steps per day. Saving the same (name, date)
   pair again **replaces** the value — it never adds to it.
@@ -22,15 +20,14 @@ entries before 1 September** (see below).
 
 Steps are stored in [Vercel Blob](https://vercel.com/docs/storage/vercel-blob)
 as one JSON file per person at `steptember2026/<slug>.json`, e.g.
-`steptember2026/test-stepper.json`:
+`steptember2026/lavanya.json`:
 
 ```json
 { "2026-09-01": 8421, "2026-09-02": 11002 }
 ```
 
 - Names are slugified (lowercase, non-alphanumerics → hyphens) before they
-  ever touch a path, so `Test Stepper` becomes `test-stepper` — never a path
-  with a space in it.
+  ever touch a path — never a path with a space in it.
 - One file per person means two people saving at the same time write to two
   different blobs and can't clobber each other.
 - Blob is CDN-backed, so reads go through `@vercel/blob`'s `get(..., { useCache: false })`,
@@ -98,9 +95,6 @@ are constants in `lib/roster.ts`, not environment-driven.
    `BLOB_READ_WRITE_TOKEN` in the project's environment variables
    automatically — no manual copying needed for the deployed app.
 3. Deploy (`git push` to your production branch, or `vercel --prod`).
-4. Before 1 September, open the deployed board, pick **Test Stepper**, and
-   remove any entries logged while trying it out (each has a **Remove**
-   button under "Test Stepper's days").
 
 No other configuration, database, or build step is required — the Next.js
 build (`next build`) is what Vercel runs by default.

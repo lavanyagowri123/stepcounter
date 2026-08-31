@@ -11,7 +11,6 @@ import {
   START,
   END,
   TEAM_GOAL,
-  TEST_PERSON,
   type Person,
 } from "@/lib/roster";
 import { dayNumber, fmt, prettyDate, streakOf, todayISO } from "@/lib/dates";
@@ -150,7 +149,7 @@ export default function StepBoard() {
   }, [entries]);
 
   const leader = board[0]?.total || 0;
-  const teamTotal = board.reduce((s, p) => (p.name === TEST_PERSON ? s : s + p.total), 0);
+  const teamTotal = board.reduce((s, p) => s + p.total, 0);
   const pace = day * DAILY_TARGET;
   const scale = Math.max(leader, pace, DAILY_TARGET);
 
@@ -168,7 +167,7 @@ export default function StepBoard() {
     if (loading) return "Loading the board…";
     if (day === 0) return "Thirty days, six pairs of legs. First entries go in on 1 September.";
     if (teamTotal === 0) return "Nobody has logged a step yet. Someone has to go first.";
-    if (mine && mine.name !== TEST_PERSON && mine.total >= pace)
+    if (mine && mine.total >= pace)
       return `${fmt(mine.total - pace)} ahead of the 10k-a-day pace. Keep it there.`;
     if (mine && mine.total > 0)
       return `${fmt(pace - mine.total)} behind pace — about ${((pace - mine.total) / DAILY_TARGET).toFixed(1)} days to claw back.`;
@@ -210,7 +209,7 @@ export default function StepBoard() {
             />
           ))}
           <span className="walker" style={{ left: `${Math.min(100, (teamKm / ROUTE_END) * 100)}%` }}>
-            🚶
+            💃
           </span>
         </div>
         <div className="jfoot">
@@ -238,7 +237,7 @@ export default function StepBoard() {
             <button
               key={n}
               type="button"
-              className={`name${n === TEST_PERSON ? " test" : ""}`}
+              className="name"
               aria-pressed={me === n}
               onClick={() => pickMe(n)}
               style={me === n ? { background: HUE[n] } : undefined}
@@ -248,7 +247,6 @@ export default function StepBoard() {
             </button>
           ))}
         </div>
-        <p className="testnote">Test Stepper is a dummy account for trying the board out. Clear its days before 1 September.</p>
         <div className="row">
           <div className="field">
             <label htmlFor="d">Date</label>

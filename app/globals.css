@@ -190,16 +190,6 @@ body {
 .name[aria-pressed="true"] .dot {
   background: rgba(20, 19, 39, 0.4) !important;
 }
-.name.test {
-  border-style: dashed;
-}
-.testnote {
-  font-size: 11.5px;
-  color: var(--dim);
-  line-height: 1.45;
-  margin: 0 0 15px;
-}
-
 .row {
   display: flex;
   gap: 9px;
@@ -230,6 +220,16 @@ input {
 }
 input::-webkit-calendar-picker-indicator {
   filter: invert(1);
+}
+/* native increment/decrement control on number inputs overlaps our own
+   padding on mobile Safari — drop it, the numeric keypad covers that job */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 .cta {
   font: inherit;
