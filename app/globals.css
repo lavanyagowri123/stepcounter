@@ -192,11 +192,11 @@ body {
 }
 .row {
   display: flex;
-  gap: 9px;
+  flex-direction: column;
+  gap: 13px;
 }
 .field {
-  flex: 1;
-  min-width: 0;
+  width: 100%;
 }
 .field label {
   display: block;
