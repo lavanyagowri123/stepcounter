@@ -1,7 +1,7 @@
 # Steptember 2026 — team step board
 
-A mobile-first leaderboard for a six-person Steptember challenge (1–30
-September 2026, 10,000 steps/day target, team goal 1,800,000 steps). Built
+A mobile-first leaderboard for a seven-person Steptember challenge (1–30
+September 2026, 10,000 steps/day target, team goal 2,100,000 steps). Built
 with Next.js (App Router, TypeScript) and Vercel Blob for storage.
 
 The roster is fixed and hardcoded in [`lib/roster.ts`](lib/roster.ts) — there
@@ -9,7 +9,7 @@ is no sign-up flow, no auth, and no admin UI.
 
 ## How it works
 
-- Everyone picks their name from six pills; the choice is remembered in
+- Everyone picks their name from seven pills; the choice is remembered in
   `localStorage` on that device.
 - Each person logs one number of steps per day. Saving the same (name, date)
   pair again **replaces** the value — it never adds to it.
