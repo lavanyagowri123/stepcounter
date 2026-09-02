@@ -283,7 +283,9 @@ export default function StepBoard() {
       </div>
 
       <h2>Leaderboard</h2>
-      {day > 0 && <p className="sub">The marker on each lane is today&rsquo;s 10,000-a-day pace ({fmt(pace)}).</p>}
+      {day > 0 && (
+        <p className="sub">The marker on each lane is where 10,000 steps a day would have you by now — {fmt(pace)}.</p>
+      )}
       {board.map((p, i) => {
         const behind = i > 0 ? board[i - 1].total - p.total : 0;
         return (
