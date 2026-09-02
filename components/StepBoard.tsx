@@ -151,7 +151,9 @@ export default function StepBoard() {
   const leader = board[0]?.total || 0;
   const teamTotal = board.reduce((s, p) => s + p.total, 0);
   const pace = day * DAILY_TARGET;
-  const scale = Math.max(leader, pace, DAILY_TARGET);
+  // headroom so the pace tick never sits flush on the track's rounded edge —
+  // at exactly 100% it fuses with the border and reads as a wall instead of a marker
+  const scale = Math.max(leader, pace, DAILY_TARGET) * 1.08;
 
   const teamKm = km(teamTotal);
   const passed = [...ROUTE].reverse().find((r) => teamKm >= r.km) || ROUTE[0];
