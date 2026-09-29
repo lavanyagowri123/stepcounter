@@ -165,6 +165,34 @@ export default function StepBoard() {
   const chaser = myRank > 0 ? board[myRank - 1] : null;
   const existingForDate = me && entries[me] ? entries[me]![date] : undefined;
 
+  const arrived = teamKm >= ROUTE_END;
+  const finished = day >= CHALLENGE_DAYS;
+  const winner = finished && board[0] && board[0].total > 0 ? board[0] : null;
+
+  const [showConfetti, setShowConfetti] = useState(false);
+  useEffect(() => {
+    if (!arrived) return;
+    setShowConfetti(true);
+    const t = setTimeout(() => setShowConfetti(false), 4500);
+    return () => clearTimeout(t);
+  }, [arrived]);
+
+  const confettiPieces = useMemo(
+    () =>
+      Array.from({ length: 28 }, (_, i) => {
+        const colors = Object.values(HUE);
+        return {
+          id: i,
+          left: Math.random() * 100,
+          delay: Math.random() * 0.7,
+          duration: 2.4 + Math.random() * 1.4,
+          color: colors[i % colors.length],
+          rotate: Math.round(Math.random() * 360),
+        };
+      }),
+    []
+  );
+
   const headline = () => {
     if (loading) return "Loading the board…";
     if (day === 0) return "Thirty days, seven pairs of legs.";
@@ -184,13 +212,43 @@ export default function StepBoard() {
       </div>
       <p className="headline">{headline()}</p>
 
+      {winner && (
+        <div className="winner">
+          <span className="winnerTrophy">🏆</span>
+          <div>
+            <p className="winnerTitle">Champion</p>
+            <p className="winnerName" style={{ color: HUE[winner.name] }}>
+              {winner.name}
+            </p>
+            <p className="winnerStat">{fmt(winner.total)} steps across 30 days</p>
+          </div>
+        </div>
+      )}
+
       {error && (
         <div className="warn" role="alert">
           <strong>Something didn&rsquo;t save.</strong> {error}
         </div>
       )}
 
-      <div className="card">
+      <div className={`card journey-card${arrived ? " arrived" : ""}`}>
+        {showConfetti && (
+          <div className="confetti-wrap" aria-hidden="true">
+            {confettiPieces.map((p) => (
+              <span
+                key={p.id}
+                className="confetti-piece"
+                style={{
+                  left: `${p.left}%`,
+                  background: p.color,
+                  animationDelay: `${p.delay}s`,
+                  animationDuration: `${p.duration}s`,
+                  transform: `rotate(${p.rotate}deg)`,
+                }}
+              />
+            ))}
+          </div>
+        )}
         <div className="jtop">
           <span className="jkm">{teamKm.toFixed(1)}</span>
           <span className="junit">km walked</span>
